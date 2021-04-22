@@ -1,0 +1,9 @@
+@import '~ui-frontend-common/sass/variables/colors';
+
+:host {
+  small {
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--vitamui-primary);
+  }
+}

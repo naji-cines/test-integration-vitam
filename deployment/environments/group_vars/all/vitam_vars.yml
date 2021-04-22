@@ -1,0 +1,45 @@
+
+vitam_defaults:
+  folder:
+    root_path: "/vitam"
+    folder_permission: "0750"
+    conf_permission: "0640"
+    folder_upload_permission: "0770"
+    script_permission: "0750"
+  users:
+    vitam: "vitam"
+    vitamdb: "vitamdb"
+    group: "vitam"
+
+vitam_vars:
+  functional_administration:
+    port_admin: 18004
+    vitam_tenants_usage_external:
+      - name: 0
+        identifiers:
+          - INGEST_CONTRACT
+          - ACCESS_CONTRACT
+          - MANAGEMENT_CONTRACT
+          - ARCHIVE_UNIT_PROFILE
+  access_external:
+    host: "access-external.service.{{ consul_remote_sites[0].name|default(vitam_site_name) }}.{{ consul_domain }}"
+    port_service: 8444
+  ingest_external:
+    host: "ingest-external.service.{{ consul_remote_sites[0].name|default(vitam_site_name) }}.{{ consul_domain }}"
+    port_service: 8443
+  security_internal:
+    port_admin: 28005
+    port_service: 8005
+
+# Vitam api urls:
+functional_adm_url: "http://{{ hostvars[groups['hosts_functionnal_admin'][0]].ip_admin }}:{{ vitam_vars.functional_administration.port_admin }}"
+admin_external_url: "https://{{ hostvars[groups['hosts_access_external'][0]].ip_admin }}:{{ vitam_vars.access_external.port_service }}"
+security_internal_url: "http://{{ hostvars[groups['hosts_security_internal'][0]].ip_admin }}:{{ vitam_vars.security_internal.port_admin }}"
+security_business_url: "http://{{ hostvars[groups['hosts_security_internal'][0]].ip_admin }}:{{ vitam_vars.security_internal.port_service }}"
+
+vitam_certs:
+  vitamui:
+    filename: "keystore_vitamui.p12"
+    password: "{{ keystores_client_vitam_vitamui }}"
+    truststore_filename: "truststore_vitam.jks"
+    password_truststore: "{{ truststores_client_vitam }}"

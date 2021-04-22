@@ -1,0 +1,22 @@
+<vitamui-common-sidenav-header
+  [title]="group?.name"
+  [icon]="'vitamui-icon-keys'"
+  [badge]="group?.enabled ? 'green' : 'grey'"
+  (onclose)="emitClose()">
+</vitamui-common-sidenav-header>
+
+<div class="vitamui-sidepanel-body">
+  <mat-tab-group class="preview-tab-group">
+    <mat-tab label="Informations" i18n-label="Information tab@@profileGroupPreviewTabInformation">
+      <app-information-tab [group]="group" [readOnly]="isPopup || group?.readonly || levelNotAllowed()"></app-information-tab>
+    </mat-tab>
+
+    <mat-tab label="Profils" i18n-label="Profiles@@profileGroupPreviewTabProfiles">
+      <app-profiles-tab [group]="group" [readOnly]="isPopup || group?.readonly || levelNotAllowed()"></app-profiles-tab>
+    </mat-tab>
+    
+    <mat-tab label="Historique" i18n-label="History tab@@profileGroupPreviewTabHistory">
+      <vitamui-common-operation-history-tab [id]="group?.id" [identifier]="group?.identifier" collectionName="groups" [filter]="filterEvents"></vitamui-common-operation-history-tab>
+    </mat-tab>
+  </mat-tab-group>
+</div>

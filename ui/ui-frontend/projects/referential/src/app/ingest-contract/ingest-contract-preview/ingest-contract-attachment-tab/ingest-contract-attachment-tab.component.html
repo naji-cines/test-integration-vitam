@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-12 form-control">
+    <button class="btn secondary mb-20" (click)="openUpdateSelectedNodes()" [disabled]="!accessContractId">
+      <div i18n="accessContract nodes tab edit@@AccessContractNodesTabEditButton">
+        Modifier
+      </div>
+    </button>
+  </div>
+</div>
+
+<div class="row c-padding-top">
+  <div class="col-10">
+    <span>Positions de rattachement SIP</span> :
+    <ul *ngIf="getTitle(ingestContract.linkParentId)">
+      <li>{{ getTitle(ingestContract.linkParentId) }}</li>
+    </ul>
+  </div>
+
+  <div class="col-10">
+    <span>Rattachement dans un bordereau: </span>
+    <span *ngIf="ingestContract.checkParentLink === 'AUTHORIZED'">Autorisé</span>
+    <span *ngIf="ingestContract.checkParentLink === 'REQUIRED'">Obligatoire</span>
+    <span *ngIf="ingestContract.checkParentLink === 'UNAUTHORIZED'">Interdit</span>
+  </div>
+
+  <div class="col-10">
+    <span>Positions de rattachement UA</span> :
+    <ul>
+      <li *ngFor="let unitId of ingestContract.checkParentId"> {{getTitle(unitId)}}</li>
+    </ul>
+  </div>
+</div>

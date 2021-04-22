@@ -1,0 +1,25 @@
+db = db.getSiblingDB('cas')
+
+print("START 209_cas_services_ref.js");
+
+db.services.insert({
+	"_id" : NumberInt(4),
+	"_class": "org.apereo.cas.services.RegexRegisteredService",
+{% if vitamui.referential.base_url is defined %}
+	"serviceId": "^{{ vitamui.referential.base_url }}/.*",
+{% else %}
+	"serviceId": "^{{ url_prefix }}/referential/.*",
+{% endif %}
+	"name": "Referential Management Application 2",
+	"logoutType" : "FRONT_CHANNEL",
+{% if vitamui.referential.base_url is defined %}
+	"logoutUrl": "{{ vitamui.referential.base_url }}/logout",
+{% else %}
+	"logoutUrl": "{{ url_prefix }}/referential/logout",
+{% endif %}
+	"attributeReleasePolicy": {
+  		"_class": "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+	}
+});
+
+print("END 209_cas_services_ref.js");

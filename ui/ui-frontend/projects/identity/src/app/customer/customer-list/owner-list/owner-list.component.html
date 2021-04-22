@@ -1,0 +1,57 @@
+<div class="vitamui-subtable p-0">
+    <div class="vitamui-table-head">
+      <div class="col-3"></div>
+      <div class="col-2">Code propriétaire</div>
+      <div class="col-3">Propriétaire</div>
+      <div class="col-2">Code coffre</div>
+      <div class="col-4"></div>
+    </div>
+
+    <div class="vitamui-table-body">
+      <div class="vitamui-table-rows">
+        <div class="vitamui-row d-flex align-items-center clickable" *ngFor="let tenant of myTenants" (click)="clickTenant(tenant, getOwner(tenant?.ownerId))">
+          <div class="col-3 d-flex justify-content-center align-items-end">
+            <div *ngIf="tenant.proof then proofIcons else notProofIcons"></div>
+          </div>
+          <div class="col-2">{{ getOwner(tenant?.ownerId)?.code }}</div>
+          <div class="col-3">{{ getOwner(tenant?.ownerId)?.name }}</div>
+          <div class="col-2">{{ tenant?.identifier }}</div>
+        </div>
+      </div>
+
+      <div class="vitamui-table-rows">
+        <div class="vitamui-row d-flex align-items-center clickable" *ngFor="let owner of ownersWithoutTenant" (click)="ownerClick.emit(owner)">
+          <div class="col-3 d-flex justify-content-center align-items-end">
+            <i class="vitamui-icon vitamui-icon-key" [style.fontSize.px]="25"></i>
+          </div>
+          <div class="col-2" (click)="ownerClick.emit(owner)">{{ owner?.name }}</div>
+          <div class="col-3" (click)="ownerClick.emit(owner)">{{ owner?.name }}</div>
+          <div class="col-3 sub-actions">
+            <div>
+              <button class="btn btn-circle primary" (click)="openCreateTenantDialog(owner)">
+                <i class="vitamui-icon vitamui-icon-home-add" [style.fontSize.px]="25"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="footer-action">
+        <div class="text normal link bold text-primary" i18n="Add owner@@OwnerListAddOwnerButton" (click)="openCreateOwnerDialog()">
+          Ajouter un propriétaire
+        </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #proofIcons>
+  <div class="text-secondary" matTooltip="Coffre des éléments de preuve" i18n-matTooltip="Proof safe info@@proofSafeInfo" matTooltipClass="vitamui-tooltip">
+    <i class="vitamui-icon vitamui-icon-safe mr-1" [style.fontSize.px]="25"></i>
+    <i class="vitamui-icon vitamui-icon-key" [style.fontSize.px]="15"></i>
+  </div>
+</ng-template>
+
+<ng-template #notProofIcons>
+  <i class="vitamui-icon vitamui-icon-safe mr-1 " [style.fontSize.px]="25"></i>
+  <i class="vitamui-icon vitamui-icon-key" [style.fontSize.px]="15"></i>
+</ng-template>

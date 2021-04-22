@@ -1,0 +1,19 @@
+.side-form {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+
+  .bottom {
+    margin-top: auto;
+    padding-top: 20px;
+  }
+}
+
+
+.permission {
+  padding-bottom: 10px;
+}
+
+.actions {
+  padding-top: 10px;
+}

@@ -1,0 +1,176 @@
+spring:
+  cloud:
+    consul:  #disabled for dev
+      enabled: false
+      discovery:
+        enabled: false
+        register: false
+
+
+server:
+  ssl:
+    key-store: ../../../../dev-deployment/environments/keystores/server/localhost/keystore_cas-server.jks
+    key-store-password: changeme
+    key-password: changeme
+  host: dev.vitamui.com
+  port: 8080
+  servlet:
+    context-path: /cas
+
+
+vitamui.cas.tenant.identifier: -1
+vitamui.cas.identity: cas
+iam-client:
+  server-host: localhost
+  server-port: 8083
+  secure: true
+  ssl-configuration:
+    keystore:
+      key-path: ../../dev-deployment/environments/keystores/server/localhost/keystore_cas-server.jks
+      key-password: changeme
+      type: JKS
+    truststore:
+      key-path: ../../dev-deployment/environments/keystores/server/truststore_server.jks
+      key-password: changeme
+    hostname-verification: false
+
+
+cas.authn.accept.users:
+
+
+cas.messageBundle.baseNames: classpath:overriden_messages,classpath:messages
+
+
+cas.tgc.path: /cas
+cas.tgc.secure: true
+cas.tgc.crypto.enabled: false
+cas.webflow.crypto.enabled: true
+cas.authn.pm.reset.crypto.enabled: true
+
+cas.server.prefix: https://dev.vitamui.com:8080/cas
+login.url: ${cas.server.prefix}/login
+
+cas.serviceRegistry.mongo.clientUri: mongodb://mongod_dbuser_cas:mongod_dbpwd_cas@localhost:27018/cas
+
+#cas.serviceRegistry.mongo.port: 27018
+#cas.serviceRegistry.mongo.databaseName: cas
+#cas.serviceRegistry.mongo.authenticationDatabaseName: cas
+#cas.serviceRegistry.mongo.replicaSet: rs0
+cas.serviceRegistry.mongo.collection: services
+#cas.serviceRegistry.mongo.userId: mongod_dbuser_cas
+#cas.serviceRegistry.mongo.password: mongod_dbpwd_cas
+
+
+cas.authn.surrogate.separator: ","
+cas.authn.surrogate.sms.attributeName: fakeNameToBeSureToFindNoAttributeAndNeverSendAnSMS
+
+
+# 24 hours cache for login delegation
+cas.ticket.tst.timeToKillInSeconds: 86400
+
+
+cas.authn.pm.enabled: true
+cas.authn.pm.policyPattern: '^(?=.*[$@!%*#?&=\-\/:;\(\)"\.,\?!''\[\]{}^\+\=_\\\|~<>`])(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])[A-Za-zÀ-ÿ0-9$@!%*#?&=\-\/:;\(\)"\.,\?!''\[\]{}^\+\=_\\\|~<>`]{8,}$'
+cas.authn.pm.reset.mail.subject: Requete de reinitialisation de mot de passe
+cas.authn.pm.reset.mail.text: "Changez de mot de passe via le lien: %s"
+cas.authn.pm.reset.mail.from: serveur-cas@noreply.com
+# 1 Day : 24 * 60 Minutes to reset password
+cas.authn.pm.reset.expirationMinutes: 1440
+cas.authn.pm.reset.mail.attributeName: email
+cas.authn.pm.reset.securityQuestionsEnabled: false
+cas.authn.pm.reset.includeServerIpAddress: false
+cas.authn.pm.autoLogin: true
+
+
+cas.authn.mfa.simple.sms.from: 'changeme'
+cas.authn.mfa.simple.sms.text: 'Code : %s'
+cas.authn.mfa.simple.sms.attributeName: mobile
+cas.authn.mfa.simple.timeToKillInSeconds: 3600
+cas.authn.mfa.simple.tokenLength: 4
+cas.authn.mfa.globalPrincipalAttributeNameTriggers: computedOtp
+cas.authn.mfa.globalPrincipalAttributeValueRegex: 'true'
+cas.authn.mfa.simple.mail.text: xxx
+
+cas.authn.mfa.simple.sms.from: 'changeme'
+cas.authn.mfa.simple.sms.text: 'Code : %s'
+cas.authn.mfa.simple.sms.attributeName: mobile
+cas.authn.mfa.simple.timeToKillInSeconds: 3600
+cas.authn.mfa.simple.tokenLength: 4
+cas.authn.mfa.globalPrincipalAttributeNameTriggers: computedOtp
+cas.authn.mfa.globalPrincipalAttributeValueRegex: 'true'
+cas.authn.mfa.simple.mail.text: xxx
+
+spring.mail.host: localhost
+spring.mail.port: 2525
+spring.mail.username: no-reply@vitamui.com
+spring.mail.password: password
+spring.mail.testConnection: false
+spring.mail.properties.mail.smtp.auth: false
+spring.mail.properties.mail.smtp.starttls.enable: false
+
+
+cas.authn.throttle.failure.threshold: 2
+cas.authn.throttle.failure.rangeSeconds: 3
+
+
+cas:
+  logout:
+    followServiceRedirects: true
+    redirectParameter: next
+
+
+management.endpoints.enabled-by-default: true
+management.endpoints.web.exposure.include: '*'
+cas.monitor.endpoints.endpoint.defaults.access[0]: PERMIT
+
+
+# for SMS:
+cas.smsProvider.twilio.accountId: changeme
+cas.smsProvider.twilio.token: changeme
+
+
+vitamui.portal.url: https://dev.vitamui.com:9000/
+
+
+token.api.cas: tokcas_ie6UZsEcHIWrfv2x
+
+
+ip.header: X-Real-IP
+
+
+# 8 hours in seconds
+api.token.ttl: 28800
+
+
+server-identity :
+  identityName: CAS
+  identityRole: SSO
+  identityServerId: 1
+
+theme:
+  primary: '#ff4a54'
+  secondary: '#241f63'
+
+logging:
+  config: src/main/config/logback-dev.xml
+  level:
+    org.springframework: 'DEBUG'
+    fr.gouv: 'DEBUG'
+    org.apereo.cas: 'DEBUG'
+    org.springframework.beans: 'OFF'
+    org.springframework.aop: 'OFF'
+    org.springframework.context: 'OFF'
+    org.springframework.core.env: 'OFF'
+    org.springframework.boot.devtools: 'OFF'
+    org.apereo.inspektr.audit.support: 'OFF'
+    # org.springframework.amqp: 'OFF'
+    # org.springframework.context.annotation: 'OFF'
+    # org.springframework.boot.devtools: 'OFF'
+    # org.apereo.inspektr.audit.support: 'OFF'
+
+# Cas CORS (necessary for mobile app)
+cas.httpWebRequest.cors.enabled: true
+cas.httpWebRequest.cors.allowCredentials: false
+cas.httpWebRequest.cors.allowOrigins: [ '*' ]
+cas.httpWebRequest.cors.allowMethods: [ '*' ]
+cas.httpWebRequest.cors.allowHeaders: [ '*' ]

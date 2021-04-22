@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<meta charset="UTF-8"/>
+    <title th:text="${@environment.getProperty('theme.vitamui-platform-name')}">VITAM-UI</title>
+
+    <meta http-equiv="refresh" th:attr="content=${'1; url=' + portalUrl}" />
+    
+    <link rel="icon" type="image/x-icon" th:href="${vitamuiFavicon} ? 'data:image/png;base64,' + ${vitamuiFavicon} : @{/images/favicon.ico}"/>
+
+    <link th:href="@{/css/cas.css}" rel="stylesheet"/>
+
+    <script type="text/javascript" th:src="@{#{webjars.jquerymin.js}}"></script>
+    <script type="text/javascript" th:src="@{#{webjars.jqueryui.js}}"></script>
+    <script src="//www.google.com/recaptcha/api.js" async defer th:if="${recaptchaSiteKey}"></script>
+
+</head>
+<body class="login bg-portal" th:styleappend="${@environment.getProperty('theme.body.style')}">
+    <div class="background bg-success"></div>
+
+	<div class="login-box login-padding login-marging success">
+	  <div class="content">
+	    <h1>Connexion établie et sécurisée</h1>
+	    <i class="material-icons check-icon">check</i>
+	  </div>
+	  <img th:src="${vitamLogo} ? 'data:image/png;base64,' + ${vitamLogo} : @{/images/vitam-logo.png}" class="logo">
+  </div>
+
+</body>
+</html>

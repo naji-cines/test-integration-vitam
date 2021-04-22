@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~ui-frontend-common/sass/icons/vitamui-icons.css';
+@import '~ui-frontend-common/sass/theme';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~ui-frontend-common/sass/fonts/font-styles.css';
+
+.demo-block {
+    margin: 20px 0;
+}
+
+.demo-layout {
+
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    // padding: 20px;
+
+}

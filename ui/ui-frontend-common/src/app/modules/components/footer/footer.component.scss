@@ -1,0 +1,11 @@
+$footer-height: 100px !default;
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: $footer-height;
+  background-color: var(--vitamui-background);
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,38 @@
+@import 'indigo-pink.css';
+@import 'material-icons.css';
+
+@import 'theme';
+@import 'font-styles';
+@import 'material-custom';
+@import 'login';
+@import 'password-recovery';
+@import 'step-email';
+@import 'step-password';
+@import 'mfa-sms';
+@import 'typography';
+
+
+body {
+    margin: 0;
+    font-family: 'Mulish', sans-serif;
+    background-color: var(--vitamui-background);
+    color: var(--vitamui-grey-900);
+}
+
+button, textarea, input {
+    font-family: 'Mulish', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.primary {
+    color: var(--vitamui-primary);
+}
+
+.picto-attention {
+  width: 31px;
+  height: 28px;
+  object-fit: contain;
+}

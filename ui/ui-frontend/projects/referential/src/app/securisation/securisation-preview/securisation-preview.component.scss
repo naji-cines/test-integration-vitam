@@ -1,0 +1,24 @@
+.title {
+  margin: 0;
+  > h2 {
+    display: inline-block;
+    word-break: break-all;
+  }
+  .btn-circle {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+::ng-deep .vitamui-mat-select.mat-form-field.mat-form-field-type-mat-select .mat-form-field-flex {
+  background-color: #FFF;
+}
+
+.button-maring {
+  margin-left: 10px;
+}
+
+.preview-btn-container{
+  display: flex;
+  margin-top: 30px;
+}

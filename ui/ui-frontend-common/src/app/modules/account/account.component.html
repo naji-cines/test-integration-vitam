@@ -1,0 +1,24 @@
+<div class="vitamui-heading">
+  <vitamui-common-title-breadcrumb [data]="dataBreadcrumb">
+    <div class="d-flex align-items-center d-flex">
+      <vitamui-common-user-photo class="mr-1" [photo]="account?.photo"></vitamui-common-user-photo>
+      <span class="pl-2" i18n="MyAccount@@MyAccountTitle">Mon Compte</span>
+    </div>
+  </vitamui-common-title-breadcrumb>
+
+  <div class="d-flex">
+    <button class="btn primary btn-header">Changer mon mot de passe</button>
+    <div *ngIf="displayAppTab">
+      <button class="btn primary btn-header">Demander une modification</button>
+      <button class="btn primary">Contacter l'administrateur</button>
+    </div>
+  </div>
+</div>
+
+<div class="vitamui-content">
+  <mat-tab-group>
+    <mat-tab label="Informations" i18n-label="Information tab@@profileDetailTabInformation">
+      <vitamui-common-account-information-tab [account]=account></vitamui-common-account-information-tab>
+    </mat-tab>
+  </mat-tab-group>
+</div>

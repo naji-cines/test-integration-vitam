@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title layout:title-pattern="$CONTENT_TITLE">VITAMUI</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{#{webjars.fontawesomemin.css}}"/>
+
+    <!--/* Core CAS CSS */-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cas.css}"/>
+
+    <link rel="icon" type="image/x-icon" th:href="${vitamuiFavicon} ? 'data:image/png;base64,' + ${vitamuiFavicon} : @{/images/favicon.ico}"/>
+
+    <script type="text/javascript" th:src="@{#{webjars.jquerymin.js}}"></script>
+
+</head>
+
+<body th:styleappend="${@environment.getProperty('theme.body.style')}">
+<div id="container" class="container">
+
+	<div class="login">
+    </div>
+    <div class="centered">
+        <div class="flex-justify-end-margin">
+            <img th:src="${vitamLogo} ? 'data:image/png;base64,' + ${vitamLogo} : @{/images/vitam-logo.png}">
+        </div>
+        <div class="login-box login-padding  step-email">
+                <img th:src="${vitamuiLargeLogo} ? 'data:image/png;base64,' + ${vitamuiLargeLogo} : @{/images/vitamui-logo-large.png}"></h1>
+
+
+            <div layout:fragment="content" id="content">
+                <h1/>
+                <p/>
+            </div>
+
+            <button class="back" type="button" th:onclick="|location.href = '@{/login(service=${serviceUrl})}';|">
+                <i class="material-icons">arrow_back</i> Retour
+            </button>
+        </div>
+    </div>
+</div>
+<script th:replace="fragments/scripts"/>
+</body>
+</html>

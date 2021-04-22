@@ -1,0 +1,17 @@
+<div *ngIf="!hidden && show" class="subrogation-banner">
+  <div>
+    <i class="vitamui-icon vitamui-icon-repeat mr-4"></i>
+    <span i18n="subrogationBannerAdmin@@subrogationBannerAdmin">Subrogation de l'utilisateur
+      {{ authService?.user?.email }} jusqu'à {{endDate | date:'HH:mm:ss'}}</span>
+
+    <button class="btn link ml-5" (click)="onStopSubrogation()" i18n="subrogation stop@@StopSubrogation">Arrêter la subrogation</button>
+  </div>
+
+  <div (click)="hidden = true">
+    <i class="vitamui-icon vitamui-icon-close clickable"></i>
+  </div>
+</div>
+
+<div *ngIf="hidden && show" class="hidden-banner-div" (click)="hidden = false">
+  <i class="vitamui-icon vitamui-icon-chevron-up"></i>
+</div>

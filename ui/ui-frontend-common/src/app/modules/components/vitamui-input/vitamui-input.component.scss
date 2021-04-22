@@ -1,0 +1,21 @@
+@import '../../../../sass/variables/colors';
+@import '../../../../sass/mixins/elevation';
+
+$input-small-height: 34px;
+$anim-timing: 150ms ease-out;
+
+:host {
+    display: inline-block;
+
+    &.ng-invalid .vitamui-input {
+        border: 1px solid $red;
+    }
+
+    &.ng-pending .vitamui-input mat-spinner {
+            display: block;
+    }
+}
+
+.vitamui-input-errors {
+    min-height: 23px;
+}

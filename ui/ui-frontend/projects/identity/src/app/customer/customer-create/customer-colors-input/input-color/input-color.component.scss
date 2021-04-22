@@ -1,0 +1,15 @@
+:host {
+  position: relative;
+  width: 255px;
+  display: block;
+
+  .input-color-preview {
+    padding: 0;
+    position: absolute;
+    top: 14px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+  }
+}

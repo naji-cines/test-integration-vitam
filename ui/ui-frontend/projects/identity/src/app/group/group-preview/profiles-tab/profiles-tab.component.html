@@ -1,0 +1,18 @@
+<button *ngIf="!readOnly" class="btn primary mb-3" (click)="openEditProfilesDialog()" i18n="Edit profiles@@profileGroupPreviewEditButton">
+  Modifier
+</button>
+
+<div class="d-flex justify-content-between align-items-center p-3 mb-2 vitamui-profile-list" *ngFor="let profile of profilesDisplay">
+  <div>
+    <div class="text caption spaced light mb-1">{{ profile?.appName | titlecase }}</div>
+    <div class="text medium">{{ profile?.tenantName }} : {{ profile?.profileName | titlecase}}</div>
+  </div>
+  <div>
+    <div
+      class="material-icons clickable text-primary"
+      [matTooltip]="profile?.description ? profile.description : 'MISC.NO_DESC' | translate"
+      matTooltipClass="vitamui-tooltip">
+        info_outline
+    </div>
+  </div>
+</div>

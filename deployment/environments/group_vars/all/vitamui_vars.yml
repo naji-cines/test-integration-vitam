@@ -1,0 +1,422 @@
+---
+
+single_vm_hostnames: [ 'localhost' ]
+vitamui_site_name: "{{ vitam_site_name }}"
+
+pki_dir: "{{ inventory_dir }}/certs"
+
+vitamui_defaults:
+  folder:
+    root_path: "/vitamui"
+    folder_permission: "0750"
+    conf_permission: "0640"
+    folder_upload_permission: "0770"
+    script_permission: "0750"
+  users:
+    vitamui: "vitamui"
+    vitamuidb: "vitamuidb"
+    group: "vitamui"
+  services:
+    # Default log level for vitam components: logback values (TRACE, DEBUG, INFO, WARN, ERROR, OFF)
+    log_level: WARN
+    start_timeout: 300
+    stop_timeout: 3600
+    port_service_timeout: 86400
+    api_call_timeout: 120
+    api_long_call_timeout: 300
+    status_retries_number: 60
+    status_retries_delay: 5
+  # Filter for the vitam package version to install
+  # FIXME : commented as has to be removed becuase doesn't work under Debain
+  #package_version: "*"
+  ### Trust X-SSL-CLIENT-CERT header for external api auth ? (true | false) ###
+  vitam_ssl_user_header: true
+  ### Force chunk mode : set true if chunk header should be checked
+  vitam_force_chunk_mode: false
+  # syslog_facility
+  syslog_facility: local0
+  # Configuration of log for reconstruction services (INFO or DEBUG for active logs). Logs will be present only on secondary site.
+  reconstruction:
+    log_level: INFO
+  portal_categories:
+    ingest_and_consultation:
+      title: "Versement & consultation"
+      displayTitle: true
+      order: 1
+    referential:
+      title: "Référentiels"
+      displayTitle: true
+      order: 2
+    supervision_and_audits:
+      title: "Supervision & Audits"
+      displayTitle: true
+      order: 3
+    security_and_application_rights:
+      title: "Sécurité & droits applicatifs"
+      displayTitle: true
+      order: 4
+    organization_and_user_rights:
+      title: "Organisation & droits utilisateurs"
+      displayTitle: true
+      order: 5
+
+
+vitamui:
+  identity:
+    host: "identity.service.{{ consul_domain }}"
+    vitamui_component: "ui-identity"
+    vitamui_component_type: "ui"
+    package_name: "vitamui-ui-identity"
+    service_name: "vitamui-ui-identity"
+    store_name: "ui-identity"
+    port_service: 8002
+    port_admin: 7002
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+    # Custom directories linked to the module
+    dirs:
+      - "{{ vitamui_defaults.folder.root_path }}/conf/assets"
+  identity_admin:
+    host: "identity-admin.service.{{ consul_domain }}"
+    vitamui_component: "ui-identity-admin"
+    vitamui_component_type: "ui"
+    package_name: "vitamui-ui-identity-admin"
+    service_name: "vitamui-ui-identity-admin"
+    store_name: "ui-identity-admin"
+    port_service: 8401
+    port_admin: 7401
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+  referential:
+    host: "referential.service.{{ consul_domain }}"
+    vitamui_component: "ui-referential"
+    vitamui_component_type: "ui"
+    package_name: "vitamui-ui-referential"
+    service_name: "vitamui-ui-referential"
+    store_name: "ui-referential"
+    port_service: 8005
+    port_admin: 7005
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+    # Custom directories linked to the module
+    dirs:
+      - "{{ vitamui_defaults.folder.root_path }}/conf/assets"
+  portal:
+    host: "portal.service.{{ consul_domain }}"
+    vitamui_component: "ui-portal"
+    vitamui_component_type: "ui"
+    package_name: "vitamui-ui-portal"
+    service_name: "vitamui-ui-portal"
+    store_name: "ui-portal"
+    port_service: 8003
+    port_admin: 7003
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+  referential_external:
+    host: "referential-external.service.{{ consul_domain }}"
+    vitamui_component: "referential-external"
+    vitamui_component_type: "external"
+    package_name: "vitamui-referential-external"
+    store_name: "referential-external"
+    service_name: "vitamui-referential-external"
+    port_service: 8105
+    port_admin: 7105
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+  referential_internal:
+    host: "referential-internal.service.{{ consul_domain }}"
+    vitamui_component: "referential-internal"
+    vitamui_component_type: "internal"
+    package_name: "vitamui-referential-internal"
+    store_name: "referential-internal"
+    service_name: "vitamui-referential-internal"
+    port_service: 8205
+    port_admin: 7205
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+    # Custom directories linked to the module
+    dirs:
+      - "{{ vitamui_defaults.folder.root_path }}/conf/assets"
+  iam_external:
+    host: "iam-external.service.{{ consul_domain }}"
+    vitamui_component: "iam-external"
+    vitamui_component_type: "external"
+    package_name: "vitamui-iam-external"
+    store_name: "iam-external"
+    service_name: "vitamui-iam-external"
+    port_service: 8101
+    port_admin: 7101
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+  iam_internal:
+    host: "iam-internal.service.{{ consul_domain }}"
+    vitamui_component: "iam-internal"
+    vitamui_component_type: "internal"
+    package_name: "vitamui-iam-internal"
+    store_name: "iam-internal"
+    service_name: "vitamui-iam-internal"
+    port_service: 8201
+    port_admin: 7201
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    gdpr_alert_readonly: true
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+    login_max_failure: 5
+    login_interval: 20
+    logbook:
+      enabled: "true"
+      delay: 60000
+  cas_server:
+    host: "cas-server.service.{{ consul_domain }}"
+    vitamui_component: "cas-server"
+    vitamui_component_type: "external"
+    package_name: "vitamui-cas-server"
+    store_name: "cas-server"
+    service_name: "vitamui-cas-server"
+    port_service: 8001
+    port_admin: 7001
+    secure: true
+    hostname_verification: true
+    jvm_log: false
+    logging_level: "INFO"
+    theme:
+      vitamui_platform_name: VITAM-UI
+      vitamui_favicon: "{{ vitamui_defaults.folder.root_path }}/conf/assets/favicon.ico"
+      vitam_logo: "{{ vitamui_defaults.folder.root_path }}/conf/assets/logo.png"
+      vitamui_logo_large: "{{ vitamui_defaults.folder.root_path }}/conf/assets/logo-large.png"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+    reset_password_url: /extras/resetPassword?username={username}&firstname={firstname}&lastname={lastname}&language={language}&ttl=1day
+    cors:
+      enabled: false
+  security_internal:
+    host: "vitamui-security-internal.service.{{ consul_domain }}"
+    vitamui_component: "security-internal"
+    vitamui_component_type: "internal"
+    package_name: "vitamui-security-internal"
+    store_name: "security-internal"
+    service_name: "vitamui-security-internal"
+    port_service: 8203
+    port_admin: 7203
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "INFO"
+  ingest:
+    host: "ingest.service.{{ consul_domain }}"
+    vitamui_component: "ui-ingest"
+    vitamui_component_type: "ui"
+    package_name: "vitamui-ui-ingest"
+    service_name: "vitamui-ui-ingest"
+    store_name: "ui-ingest"
+    port_service: 8008
+    port_admin: 7008
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "DEBUG"
+
+  ingest_external:
+    host: "ingest-external.service.{{ consul_domain }}"
+    vitamui_component: "ingest-external"
+    vitamui_component_type: "external"
+    package_name: "vitamui-ingest-external"
+    service_name: "vitamui-ingest-external"
+    store_name: "ingest-external"
+    port_service: 8108
+    port_admin: 7108
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "DEBUG"
+
+  ingest_internal:
+    host: "ingest-internal.service.{{ consul_domain }}"
+    vitamui_component: "ingest-internal"
+    vitamui_component_type: "internal"
+    package_name: "vitamui-ingest-internal"
+    service_name: "vitamui-ingest-internal"
+    store_name: "ingest-internal"
+    port_service: 8208
+    port_admin: 7208
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "DEBUG"
+
+
+  archive_search:
+    host: "archive-search.service.{{ consul_domain }}"
+    vitamui_component: "ui-archive-search"
+    vitamui_component_type: "ui"
+    package_name: "vitamui-ui-archive-search"
+    service_name: "vitamui-ui-archive-search"
+    store_name: "ui-archive-search"
+    port_service: 8009
+    port_admin: 7009
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "DEBUG"
+
+  archive_search_external:
+    host: "archive-search-external.service.{{ consul_domain }}"
+    vitamui_component: "archive-search-external"
+    vitamui_component_type: "external"
+    package_name: "vitamui-archive-search-external"
+    service_name: "vitamui-archive-search-external"
+    store_name: "archive-search-external"
+    port_service: 8109
+    port_admin: 7109
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "DEBUG"
+
+  archive_search_internal:
+    host: "archive-search-internal.service.{{ consul_domain }}"
+    vitamui_component: "archive-search-internal"
+    vitamui_component_type: "internal"
+    package_name: "vitamui-archive-search-internal"
+    service_name: "vitamui-archive-search-internal"
+    store_name: "archive-search-internal"
+    port_service: 8209
+    port_admin: 7209
+    secure: true
+    jvm_log: false
+    logging_level: "INFO"
+    log:
+      logback_max_file_size: "10MB"
+      logback_max_history: 30
+      logback_total_size_cap: "5GB"
+      root_log_level: "ERROR"
+      vitamui_level: "DEBUG"
+
+vitamui_platform_informations:
+  name: "system_customer"
+  description: "System Customer"
+  company_name: "system company"
+  default_email_domain: "change-it.fr"
+  email_domains: "change-it.fr"
+  default_password: '$2a$10$NV/LI.Uw/BDBTdxBgr8EP.Zn1mCh8vbK746Fy7BMaWk7JgHw6GwVu' # Change-it0!
+  address:
+    street: change-it
+    zip_code: change-it
+    city: change-it
+    country: change-it
+  proof_tenant: 1
+  cas_tenant: -1
+  first_customer_tenant: 9
+  theme:
+    portal_logo: logo_PORTAL.png
+    header_logo: logo_HEADER.png
+    footer_logo: logo_FOOTER.png
+    portal_message: "Profitez d'un portail unique pour rechercher dans les archives de vos coffres, pour déposer des éléments en toutes sécurité et pour imprimer des etiquettes en quelques clics."
+    portal_title: "Portail des applications de l'archivage"
+    theme_colors:
+      vitamui_primary: "#702382"
+      vitamui_secondary: "#2563A9"
+      vitamui_tertiary: "#C22A40"
+      vitamui_header_footer: "#ffffff"
+      vitamui_background: "#F5F7FC"
+  platform_name: VITAM-UI
+  customer:
+    technical_referent_email: contact@programmevitam.fr
+    website_url: http://www.programmevitam.fr
+
+# backup specific collections before install and restore after install
+mongo_dump_folder: /backup/mongod/
+mongo_backup_reinstall:
+  - db: "iam"
+    collections: [ "customers","users","profiles", "groups" ]
+  #- db: "admin"
+  #  collections: []

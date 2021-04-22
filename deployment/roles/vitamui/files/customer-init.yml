@@ -1,0 +1,155 @@
+# This configuration file indicates profiles , profiles groups and users automatically create when a new customer or customer tenant is created.
+# Put as many as you want following the template given
+customer-init:
+  # Default profiles for each customer created
+  profiles:
+  #- name: profileName
+  #  description: desc
+  #  level: 1
+  #  app-name: app
+  #  roles:
+  #    - role_1
+  #    - role_2
+  #    - role_3
+  #  ...
+  # Default profiles groups for each customer created
+  profiles-groups:
+  #- name: group1
+  #   description: desc
+  #   level: 2
+  #   profiles:
+  #     - profileName
+  #  ...
+
+  # Default users for each customer created
+  users:
+  #- last-name: lastName
+  #   first-name: firstName
+  #   profiles-group-name: group1
+  #   level: 1
+  #   email-prefix: email.local-part
+
+  # Default profiles for each tenant created
+  tenant-profiles:
+    - name: Profil pour la gestion des contrats d'accès
+      description: Gestion des contrats d'accès dans Vitam
+      app-name: ACCESS_APP
+      level:
+      roles:
+        - ROLE_GET_ACCESS_CONTRACTS
+        - ROLE_CREATE_ACCESS_CONTRACTS
+        - ROLE_UPDATE_ACCESS_CONTRACTS
+
+    - name: Profil pour la gestion des contrats d'entrée
+      description: Gestion des contrats d'entrée dans Vitam
+      app-name: INGEST_APP
+      level:
+      roles:
+        - ROLE_GET_INGEST_CONTRACTS
+        - ROLE_CREATE_INGEST_CONTRACTS
+        - ROLE_UPDATE_INGEST_CONTRACTS
+
+    - name: Profil pour les services agents
+      description: Gestion des services agents dans Vitam
+      app-name: AGENCIES_APP
+      level:
+      roles:
+        - ROLE_GET_AGENCIES
+        - ROLE_CREATE_AGENCIES
+        - ROLE_UPDATE_AGENCIES
+        - ROLE_DELETE_AGENCIES
+        - ROLE_EXPORT_AGENCIES
+        - ROLE_IMPORT_AGENCIES
+
+    - name: Profil pour la gestion des Audits
+      description: Gestion des audits dans Vitam
+      app-name: AUDIT_APP
+      level:
+      roles:
+        - ROLE_GET_AUDITS
+        - ROLE_RUN_AUDITS
+
+    - name: Profil pour la gestion des opérations de sécurisation
+      description: Gestion des opérations de sécurisation dans Vitam
+      app-name: SECURE_APP
+      level:
+      roles:
+        - ROLE_GET_OPERATIONS
+
+    - name: Profil de gestion des valeurs probantes
+      description: Gestion des valeurs probantes dans Vitam
+      app-name: PROBATIVE_VALUE_APP
+      level:
+      roles:
+        - ROLE_GET_OPERATIONS
+        - ROLE_RUN_PROBATIVE_VALUE
+
+    - name: Profil pour la lecture des formats de fichiers
+      description: Lecture des formats de fichiers dans Vitam
+      app-name: FILE_FORMATS_APP
+      level:
+      roles:
+        - ROLE_GET_FILE_FORMATS
+
+    - name: Profil Journal des Opérations
+      description: Gestion des applications des Journaux des Opérations
+      app-name: LOGBOOK_OPERATION_APP
+      level:
+      roles:
+        - ROLE_LOGBOOKS
+
+    - name: Profil pour le dépôt et suivi des versements
+      description: Gestion des applications de dépôt et suivi des versements
+      app-name: INGEST_MANAGEMENT_APP
+      level:
+      roles:
+        - ROLE_GET_INGEST
+        - ROLE_CREATE_INGEST
+        - ROLE_GET_ALL_INGEST
+        - ROLE_LOGBOOKS
+
+    - name: Profil Arbres et Plans
+      description: Gestion des applications d'import d'arbres de positionnement et plans de classement
+      app-name: HOLDING_FILLING_SCHEME_APP
+      level:
+      roles:
+        - ROLE_CREATE_HOLDING_FILLING_SCHEME
+        - ROLE_GET_HOLDING_FILLING_SCHEME
+        - ROLE_GET_ALL_HOLDING_FILLING_SCHEME
+
+    - name: Profil pour la gestion des règles de gestion
+      description: Gestion des règles de gestion
+      app-name: RULES_APP
+      level:
+      roles:
+        - ROLE_GET_RULES
+        - ROLE_CREATE_RULES
+        - ROLE_UPDATE_RULES
+        - ROLE_DELETE_RULES
+
+    - name: Profil pour l'accès et la recherche d'archives
+      description: Gestion d'accès et de recherche des archives dans Vitam
+      app-name: ARCHIVE_SEARCH_MANAGEMENT_APP
+      level:
+      roles:
+        - ROLE_CREATE_ARCHIVE_SEARCH
+        - ROLE_GET_ARCHIVE_SEARCH
+        - ROLE_GET_ALL_ARCHIVE_SEARCH
+    - name: Lancement de recherches par DSL
+      description: Lancement de recherches par DSL dans Vitam
+      app-name: DSL_APP
+      level:
+      roles:
+        - ROLE_GET_UNITS
+
+  # Other Default profiles for admin group
+  admin-profiles:
+  #- name: profileName
+  #  description: desc
+  #  level: 1
+  #  app-name: app
+  #  roles:
+  #   - role_1
+  #   - role_2
+  #   - role_3
+  #  ...

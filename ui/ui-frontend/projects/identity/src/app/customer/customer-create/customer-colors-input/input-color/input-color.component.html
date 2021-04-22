@@ -1,0 +1,21 @@
+<vitamui-common-input #colorPickerInput [colorPicker]="color" (colorPickerChange)="handlePicker($event)"
+    (colorPickerOpen)="onPickerOpen()" [disabled]="disabled" (change)="forceHex()" (keyup)="forceHex()"
+    [formControl]="colorInput" cpAlphaChannel="disabled" cpDisableInput="true" cpOutputFormat="hex"
+    cpFallbackColor="#000" maxlength="7" placeholder="{{placeholder}}">
+    <vitamui-common-input-error class="d-flex align-items-center" *ngIf="colorError!==colorErrorEnum.NONE">
+        <i class="vitamui-icon vitamui-icon-anomalie mr-1" [style.fontSize.px]="20"></i>
+        <div [ngSwitch]="colorError">
+            <div *ngSwitchCase="colorErrorEnum.COLOR_INVALID">{{'COLOR.INVALID' | translate}}</div>
+            <ng-container *ngSwitchCase="colorErrorEnum.COLOR_TOO_LIGHT">
+                <div>{{'COLOR.TOO_LIGHT' | translate}}</div>
+                <div>{{'COLOR.INCOMPATIBLE' | translate}}</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="colorErrorEnum.COLOR_TOO_DARK">
+                <div>{{'COLOR.TOO_DARK' | translate}}</div>
+                <div>{{'COLOR.INCOMPATIBLE' | translate}}</div>
+            </ng-container>
+        </div>
+    </vitamui-common-input-error>
+</vitamui-common-input>
+
+<div class="input-color-preview" [style.background-color]="color | safeStyle" (click)="openPicker()"></div>
